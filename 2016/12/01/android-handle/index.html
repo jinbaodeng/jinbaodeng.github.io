@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android, Html5" />
+  <meta name="keywords" content="android," />
 
 
 
@@ -84,15 +84,19 @@
 
 
 
-<meta name="description" content="博客 source soft">
-<meta property="og:type" content="website">
-<meta property="og:title" content="博客记">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="在android项目中，handler作为消息句柄，使用与线程与主线程间，有时候使用过程中稍微不注意就会出现内存溢出，为了防止handler内存溢出，可以使用如下方法
+写一个静态类继承Handler1234567891011private static class CopyFileHandler extends Handler &amp;#123;        WeakReference&amp;lt;AppS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Handler 使用中可能引发的内存泄漏">
+<meta property="og:url" content="http://yoursite.com/2016/12/01/android-handle/index.html">
 <meta property="og:site_name" content="博客记">
-<meta property="og:description" content="博客 source soft">
+<meta property="og:description" content="在android项目中，handler作为消息句柄，使用与线程与主线程间，有时候使用过程中稍微不注意就会出现内存溢出，为了防止handler内存溢出，可以使用如下方法
+写一个静态类继承Handler1234567891011private static class CopyFileHandler extends Handler &amp;#123;        WeakReference&amp;lt;AppS">
+<meta property="og:updated_time" content="2016-12-01T14:45:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="博客记">
-<meta name="twitter:description" content="博客 source soft">
+<meta name="twitter:title" content="Handler 使用中可能引发的内存泄漏">
+<meta name="twitter:description" content="在android项目中，handler作为消息句柄，使用与线程与主线程间，有时候使用过程中稍微不注意就会出现内存溢出，为了防止handler内存溢出，可以使用如下方法
+写一个静态类继承Handler1234567891011private static class CopyFileHandler extends Handler &amp;#123;        WeakReference&amp;lt;AppS">
 
 
 
@@ -110,7 +114,7 @@
   };
 </script>
 
-  <title> 博客记 </title>
+  <title> Handler 使用中可能引发的内存泄漏 | 博客记 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -131,9 +135,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -230,9 +232,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -252,10 +254,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/12/01/android-handle/" itemprop="url">
-                  Handler 使用中可能引发的内存泄漏
-                </a>
+                Handler 使用中可能引发的内存泄漏
               
             
           </h1>
@@ -314,383 +313,64 @@
       
 
       
-        
-          
-          在android项目中，handler作为消息句柄，使用与线程与主线程间，有时候使用过程中稍微不注意就会出现内存溢出，为了防止handler内存溢出，可以使用如下方法
-写一个静态类继承Handler1234567891011private static class CopyFileHandler e
-          ...
+        <p>在android项目中，handler作为消息句柄，使用与线程与主线程间，有时候使用过程中稍微不注意就会出现内存溢出，为了防止handler内存溢出，可以使用如下方法</p>
+<h3 id="写一个静态类继承Handler"><a href="#写一个静态类继承Handler" class="headerlink" title="写一个静态类继承Handler"></a>写一个静态类继承Handler</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">private static class CopyFileHandler extends Handler &#123;</div><div class="line">        WeakReference&lt;AppStartActivity&gt; mActivity;</div><div class="line">        public CopyFileHandler(AppStartActivity activity)   &#123;</div><div class="line">            mActivity = new WeakReference&lt;&gt;(activity);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void handleMessage(Message msg) &#123;</div><div class="line">            final AppStartActivity activity = mActivity.get();</div><div class="line">            //handle you message here!</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="在activity中使用CopyFileHandler"><a href="#在activity中使用CopyFileHandler" class="headerlink" title="在activity中使用CopyFileHandler"></a>在activity中使用CopyFileHandler</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">private CopyFileHandler mHandler;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_appstart);</div><div class="line">        mHandler = new CopyFileHandler(this);</div><div class="line">        startCopyDBThread();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void startCopyFileThread()&#123;</div><div class="line">        Log.d(TAG, &quot;startCopyDBThread&quot;);</div><div class="line">        new Thread(new Runnable() &#123;</div><div class="line">            @Override</div><div class="line">            public void run() &#123;</div><div class="line">                //DO SOMETHING LIKE: copyDBFile();</div><div class="line">                Message msg=mHandler.obtainMessage();</div><div class="line">                mHandler.sendMessage(msg);</div><div class="line">            &#125;</div><div class="line">        &#125;).start();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="在onDestroy-方法中"><a href="#在onDestroy-方法中" class="headerlink" title="在onDestroy()方法中"></a>在onDestroy()方法中</h3><p>根据api文档描述<br>public final void removeCallbacksAndMessages(Object token)<br>Added in API level 1<br>Remove any pending posts of callbacks and sent messages whose obj istoken. If token is null, all callbacks and messages will be removed.</p>
+<p>上面的意思是说，如果参数为null的话，会将所有的Callbacks和Messages全部清除掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mHandler.removeCallbacksAndMessages(null);</div></pre></td></tr></table></figure>
+      
+    </div>
 
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/01/android-handle/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/01/android-lock/" itemprop="url">
-                  android 监听锁屏
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-01T22:11:34+08:00" content="2016-12-01">
-              2016-12-01
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/android/" rel="tag">#android</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          Android监听锁屏，最主要应用在，手机锁屏后重新打开后必须要与服务器同步数据，这样以防锁屏很久而客户端数据已经过时…
-写监听锁屏类12345678910111213141516171819202122232425262728293031323334353637383940414243444546
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/01/android-lock/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/01/android-lock/" rel="next" title="android 监听锁屏">
+                <i class="fa fa-chevron-left"></i> android 监听锁屏
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/01/android/" itemprop="url">
-                  EditText 默认数字键盘，只可以输入数字，英文字母
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-01T17:32:59+08:00" content="2016-12-01">
-              2016-12-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/android/" itemprop="url" rel="index">
-                    <span itemprop="name">android</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          EditText 是因为项目需要EditText需要默认打开数字键盘，而且只能输入数字，以及英文字母，特定场合下重写editText的键盘输入监听…已达到项目需求。
-EditText 默认数字键盘，只可以输入数字，英文字母123456789101112131415et_test.setKeyList
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/01/android/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/17/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-17T12:50:40+08:00" content="2016-11-17">
-              2016-11-17
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/17/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -698,6 +378,10 @@ EditText 默认数字键盘，只可以输入数字，英文字母12345678910111
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -717,8 +401,17 @@ EditText 默认数字键盘，只可以输入数字，英文字母12345678910111
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpeg"
@@ -768,6 +461,17 @@ EditText 默认数字键盘，只可以输入数字，英文字母12345678910111
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写一个静态类继承Handler"><span class="nav-number">1.</span> <span class="nav-text">写一个静态类继承Handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在activity中使用CopyFileHandler"><span class="nav-number">2.</span> <span class="nav-text">在activity中使用CopyFileHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在onDestroy-方法中"><span class="nav-number">3.</span> <span class="nav-text">在onDestroy()方法中</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -871,6 +575,10 @@ EditText 默认数字键盘，只可以输入数字，英文字母12345678910111
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
