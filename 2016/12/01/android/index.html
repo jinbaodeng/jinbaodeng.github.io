@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android studio," />
+  <meta name="keywords" content="android," />
 
 
 
@@ -84,16 +84,28 @@
 
 
 
-<meta name="description" content="测试">
+<meta name="description" content="#EditText 默认数字键盘，只可以输入数字，英文字母et_test.setKeyListener(new NumberKeyListener() {
+    // 0无键盘 1英文键盘 2模拟键盘 3数字键盘
+    @Override
+    public int getInputType() {
+   // TODO Auto-generated method stub">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android">
 <meta property="og:url" content="http://yoursite.com/2016/12/01/android/index.html">
 <meta property="og:site_name" content="博客记">
-<meta property="og:description" content="测试">
-<meta property="og:updated_time" content="2016-12-01T09:34:18.000Z">
+<meta property="og:description" content="#EditText 默认数字键盘，只可以输入数字，英文字母et_test.setKeyListener(new NumberKeyListener() {
+    // 0无键盘 1英文键盘 2模拟键盘 3数字键盘
+    @Override
+    public int getInputType() {
+   // TODO Auto-generated method stub">
+<meta property="og:updated_time" content="2016-12-01T14:03:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android">
-<meta name="twitter:description" content="测试">
+<meta name="twitter:description" content="#EditText 默认数字键盘，只可以输入数字，英文字母et_test.setKeyListener(new NumberKeyListener() {
+    // 0无键盘 1英文键盘 2模拟键盘 3数字键盘
+    @Override
+    public int getInputType() {
+   // TODO Auto-generated method stub">
 
 
 
@@ -310,7 +322,21 @@
       
 
       
-        <p>测试</p>
+        <p>#EditText 默认数字键盘，只可以输入数字，英文字母<br><code>et_test.setKeyListener(new NumberKeyListener() {
+    // 0无键盘 1英文键盘 2模拟键盘 3数字键盘
+    @Override
+    public int getInputType() {
+   // TODO Auto-generated method stub
+        return 3;
+    }
+    // 返回允许输入的字符
+    @Override
+    protected char[] getAcceptedChars() {
+    // TODO Auto-generated method stub
+        char[] c = {&#39;q&#39;, &#39;w&#39;, &#39;e&#39;, &#39;r&#39;, &#39;t&#39;, &#39;y&#39;, &#39;u&#39;, &#39;i&#39;, &#39;o&#39;, &#39;p&#39;, &#39;a&#39;, &#39;s&#39;, &#39;d&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;z&#39;, &#39;x&#39;, &#39;c&#39;, &#39;v&#39;, &#39;b&#39;, &#39;n&#39;, &#39;m&#39;, &#39;Q&#39;, &#39;W&#39;, &#39;E&#39;, &#39;R&#39;, &#39;T&#39;, &#39;Y&#39;, &#39;U&#39;, &#39;I&#39;, &#39;O&#39;, &#39;P&#39;, &#39;A&#39;, &#39;S&#39;, &#39;D&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;Z&#39;, &#39;X&#39;, &#39;C&#39;, &#39;V&#39;, &#39;B&#39;, &#39;N&#39;, &#39;M&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;0&#39;};
+        return c;
+    }
+});</code></p>
 
       
     </div>
@@ -332,7 +358,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android-studio/" rel="tag">#android studio</a>
+            <a href="/tags/android/" rel="tag">#android</a>
           
         </div>
       
